@@ -1,34 +1,44 @@
 <?php
 
-require_once '../clase/producto.php';
-require_once '../clase/persona.php';
-require_once '../clase/cliente.php';
+try {
+
+    require_once '../clase/producto.php';
+    require_once '../clase/persona.php';
+    require_once '../clase/cliente.php';
 
 
-// PRODUCTO
-$producto = new Producto(
-    "Computador Portátil",
-    2500000,
-    10,
-    "Tecnología"
-);
+    // PRODUCTO
+
+    $producto = new Producto(
+        "Computador Portátil",
+        2500000,
+        10,
+        "Tecnología"
+    );
 
 
-// CLIENTE
-$cliente1 = new Cliente(
-    "Laura",
-    "Gómez",
-    25,
-    "laura@correo.com",
-    "123456789",
-    "3001234567",
-    "La Dorada",
-    "Carrera 5 # 10-20"
-);
+    // CLIENTE
+
+    $cliente1 = new Cliente(
+        "Laura",
+        "Gómez",
+        25,
+        "laura@correo.com",
+        "123456789",
+        "3001234567",
+        "La Dorada",
+        "Carrera 5 # 10-20"
+    );
+
+} catch (Exception $e) {
+
+    echo "Error en el sistema: " . $e->getMessage();
+}
 
 ?>
 
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
@@ -50,10 +60,17 @@ $cliente1 = new Cliente(
 
     <?php
 
-    echo "Nombre: " . $producto->getNombre() . "<br>";
-    echo "Precio: $" . $producto->getPrecio() . "<br>";
-    echo "Cantidad: " . $producto->getCantidad() . "<br>";
-    echo "Categoría: " . $producto->getCategoria() . "<br>";
+    try {
+
+        echo "Nombre: " . $producto->getNombre() . "<br>";
+        echo "Precio: $" . $producto->getPrecio() . "<br>";
+        echo "Cantidad: " . $producto->getCantidad() . "<br>";
+        echo "Categoría: " . $producto->getCategoria() . "<br>";
+
+    } catch (Exception $e) {
+
+        echo "Error al mostrar el producto: " . $e->getMessage();
+    }
 
     ?>
 
@@ -65,7 +82,14 @@ $cliente1 = new Cliente(
 
     <?php
 
-    echo $cliente1->saludar();
+    try {
+
+        echo $cliente1->saludar();
+
+    } catch (Exception $e) {
+
+        echo "Error al mostrar el cliente: " . $e->getMessage();
+    }
 
     ?>
 

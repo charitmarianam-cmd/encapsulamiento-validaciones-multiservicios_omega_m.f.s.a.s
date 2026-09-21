@@ -9,10 +9,17 @@ class Persona
 
     public function __construct($nombre, $apellido, $edad, $correo)
     {
-        $this->setNombre($nombre);
-        $this->setApellido($apellido);
-        $this->setEdad($edad);
-        $this->setCorreo($correo);
+        try {
+
+            $this->setNombre($nombre);
+            $this->setApellido($apellido);
+            $this->setEdad($edad);
+            $this->setCorreo($correo);
+
+        } catch (Exception $e) {
+
+            echo "Error al crear la persona: " . $e->getMessage();
+        }
     }
 
     // GETTERS
@@ -65,10 +72,17 @@ class Persona
 
     public function saludar()
     {
-        return "Hola, Mi nombre es: " . $this->nombre . "<br>"
-            . "Mi apellido es: " . $this->apellido . "<br>"
-            . "Mi Edad es: " . $this->edad . "<br>"
-            . "Mi Correo es: " . $this->correo . "<br>";
+        try {
+
+            return "Hola, Mi nombre es: " . $this->nombre . "<br>"
+                . "Mi apellido es: " . $this->apellido . "<br>"
+                . "Mi Edad es: " . $this->edad . "<br>"
+                . "Mi Correo es: " . $this->correo . "<br>";
+
+        } catch (Exception $e) {
+
+            return "Error al mostrar la información: " . $e->getMessage();
+        }
     }
 }
 

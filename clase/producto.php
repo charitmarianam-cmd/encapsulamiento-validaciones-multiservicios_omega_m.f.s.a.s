@@ -11,11 +11,21 @@ class Producto
 
     public function __construct($nombre, $precio, $cantidad, $categoria)
     {
-        $this->setNombre($nombre);
-        $this->setPrecio($precio);
-        $this->setCantidad($cantidad);
-        $this->setCategoria($categoria);
+        try {
+
+            $this->setNombre($nombre);
+            $this->setPrecio($precio);
+            $this->setCantidad($cantidad);
+            $this->setCategoria($categoria);
+
+        } catch (Exception $e) {
+
+            echo "Error al crear el producto: " . $e->getMessage();
+        }
     }
+
+
+    // GETTERS
 
     public function getNombre()
     {
@@ -38,53 +48,85 @@ class Producto
     }
 
 
+    // SETTERS
+
     public function setNombre($nombre)
     {
-        if (is_string($nombre) && trim($nombre) !== "") {
+        try {
 
-            $this->nombre = trim($nombre);
+            if (is_string($nombre) && trim($nombre) !== "") {
 
-            return true;
+                $this->nombre = trim($nombre);
+
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception $e) {
+
+            return false;
         }
-
-        return false;
     }
+
 
     public function setPrecio($precio)
     {
-        if (is_numeric($precio) && $precio > 0) {
+        try {
 
-            $this->precio = $precio;
+            if (is_numeric($precio) && $precio > 0) {
 
-            return true;
+                $this->precio = $precio;
+
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception $e) {
+
+            return false;
         }
-
-        return false;
     }
+
 
     public function setCantidad($cantidad)
     {
-        if (is_numeric($cantidad) && $cantidad >= 0) {
+        try {
 
-            $this->cantidad = $cantidad;
+            if (is_numeric($cantidad) && $cantidad >= 0) {
 
-            return true;
+                $this->cantidad = $cantidad;
+
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception $e) {
+
+            return false;
         }
-
-        return false;
     }
 
 
     public function setCategoria($categoria)
     {
-        if (is_string($categoria) && trim($categoria) !== "") {
+        try {
 
-            $this->categoria = trim($categoria);
+            if (is_string($categoria) && trim($categoria) !== "") {
 
-            return true;
+                $this->categoria = trim($categoria);
+
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception $e) {
+
+            return false;
         }
-
-        return false;
     }
 }
 
