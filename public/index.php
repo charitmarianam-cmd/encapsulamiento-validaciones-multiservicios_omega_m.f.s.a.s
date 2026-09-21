@@ -1,97 +1,143 @@
 <?php
 
-try {
+require_once '../models/producto.php';
+require_once '../models/cliente.php';
+require_once '../models/persona.php';
 
-    require_once '../clase/producto.php';
-    require_once '../clase/persona.php';
-    require_once '../clase/cliente.php';
+$productoModel = new Producto();
+$clienteModel = new Cliente();
+$personaModel = new Persona();
 
+$productos = $productoModel->getAll();
+$productoConsultado = $productoModel->getById(3);
 
-    // PRODUCTO
+$clientes = $clienteModel->getAll();
+$clienteConsultado = $clienteModel->getById(1);
 
-    $producto = new Producto(
-        "Computador Portátil",
-        2500000,
-        10,
-        "Tecnología"
-    );
-
-
-    // CLIENTE
-
-    $cliente1 = new Cliente(
-        "Laura",
-        "Gómez",
-        25,
-        "laura@correo.com",
-        "123456789",
-        "3001234567",
-        "La Dorada",
-        "Carrera 5 # 10-20"
-    );
-
-} catch (Exception $e) {
-
-    echo "Error en el sistema: " . $e->getMessage();
-}
+$personas = $personaModel->getAll();
+$personaConsultada = $personaModel->getById(1);
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Encapsulamiento y Herencia</title>
-
+    <title>Validaciones Omega</title>
 </head>
 
 <body>
 
-    <h1>Información del sistema</h1>
+    <h1>Datos de la base de datos</h1>
+
+    <h2>Productos - Get All</h2>
+
+    <?php foreach ($productos as $producto): ?>
+
+        <p>
+            ID: <?= $producto['id'] ?> |
+            Nombre: <?= $producto['nombre'] ?> |
+            Precio: <?= $producto['precio'] ?> |
+            Cantidad: <?= $producto['cantidad'] ?> |
+            Categoría: <?= $producto['categoria'] ?>
+        </p>
+
+    <?php endforeach; ?>
 
 
-    <h2>Producto</h2>
+    <h2>Producto consultado - Get By ID</h2>
 
-    <?php
+    <?php if ($productoConsultado): ?>
 
-    try {
+        <p>
+            ID: <?= $productoConsultado['id'] ?><br>
+            Nombre: <?= $productoConsultado['nombre'] ?><br>
+            Precio: <?= $productoConsultado['precio'] ?><br>
+            Cantidad: <?= $productoConsultado['cantidad'] ?><br>
+            Categoría: <?= $productoConsultado['categoria'] ?>
+        </p>
 
-        echo "Nombre: " . $producto->getNombre() . "<br>";
-        echo "Precio: $" . $producto->getPrecio() . "<br>";
-        echo "Cantidad: " . $producto->getCantidad() . "<br>";
-        echo "Categoría: " . $producto->getCategoria() . "<br>";
+    <?php else: ?>
 
-    } catch (Exception $e) {
+        <p>Producto no encontrado.</p>
 
-        echo "Error al mostrar el producto: " . $e->getMessage();
-    }
-
-    ?>
+    <?php endif; ?>
 
 
     <hr>
 
 
-    <h2>Cliente</h2>
+    <h2>Clientes - Get All</h2>
 
-    <?php
+    <?php foreach ($clientes as $cliente): ?>
 
-    try {
+        <p>
+            ID: <?= $cliente['id'] ?> |
+            Documento: <?= $cliente['documento'] ?> |
+            Teléfono: <?= $cliente['telefono'] ?> |
+            Ciudad: <?= $cliente['ciudad'] ?> |
+            Dirección: <?= $cliente['direccion'] ?>
+        </p>
 
-        echo $cliente1->saludar();
+    <?php endforeach; ?>
 
-    } catch (Exception $e) {
 
-        echo "Error al mostrar el cliente: " . $e->getMessage();
-    }
+    <h2>Cliente consultado - Get By ID</h2>
 
-    ?>
+    <?php if ($clienteConsultado): ?>
+
+        <p>
+            ID: <?= $clienteConsultado['id'] ?><br>
+            Documento: <?= $clienteConsultado['documento'] ?><br>
+            Teléfono: <?= $clienteConsultado['telefono'] ?><br>
+            Ciudad: <?= $clienteConsultado['ciudad'] ?><br>
+            Dirección: <?= $clienteConsultado['direccion'] ?>
+        </p>
+
+    <?php else: ?>
+
+        <p>Cliente no encontrado.</p>
+
+    <?php endif; ?>
+
+
+    <hr>
+
+
+    <h2>Personas - Get All</h2>
+
+    <?php foreach ($personas as $persona): ?>
+
+        <p>
+            ID: <?= $persona['id'] ?> |
+            Nombre: <?= $persona['nombre'] ?> |
+            Apellido: <?= $persona['apellido'] ?> |
+            Edad: <?= $persona['edad'] ?> |
+            Correo: <?= $persona['correo'] ?>
+        </p>
+
+    <?php endforeach; ?>
+
+
+    <h2>Persona consultada - Get By ID</h2>
+
+    <?php if ($personaConsultada): ?>
+
+        <p>
+            ID: <?= $personaConsultada['id'] ?><br>
+            Nombre: <?= $personaConsultada['nombre'] ?><br>
+            Apellido: <?= $personaConsultada['apellido'] ?><br>
+            Edad: <?= $personaConsultada['edad'] ?><br>
+            Correo: <?= $personaConsultada['correo'] ?>
+        </p>
+
+    <?php else: ?>
+
+        <p>Persona no encontrada.</p>
+
+    <?php endif; ?>
 
 </body>
 
